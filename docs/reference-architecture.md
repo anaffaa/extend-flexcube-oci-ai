@@ -1,5 +1,9 @@
 # Extend Oracle FLEXCUBE with AI on OCI
 
+> [!IMPORTANT]
+> Personal playbook by Abeer Naffa', proposed for review. Not an official Oracle solution, product or reference architecture,
+> and not supported or warranted by Oracle. See the [disclaimer](../README.md#disclaimer).
+
 Banks run Oracle FLEXCUBE Universal Banking as their system of record. The data it holds (customers, accounts, every posting,
 loan schedules, card settlements) already describes how each customer and business is doing. Most of that signal stays
 unused because changing the core is slow, risky and expensive.

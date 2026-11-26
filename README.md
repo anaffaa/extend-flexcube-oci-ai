@@ -1,7 +1,13 @@
 # Extend Oracle FLEXCUBE with AI on OCI
 
+> [!IMPORTANT]
+> **Disclaimer: this is a personal playbook, not an Oracle product or official Oracle solution.**
+> It was created by Abeer Naffa' in a personal capacity to share a pattern and sample code. It is not supported, endorsed,
+> reviewed or warranted by Oracle, and any views in it are the author's own. It is provided "as is", without warranty of any
+> kind. You are responsible for testing, securing and adapting it before any use with real data or in production.
+
 Add AI-driven capabilities to Oracle FLEXCUBE Universal Banking **without changing the core**. This repository is the
-reference implementation behind the Oracle Architecture Center reference architecture and playbooks: a governed data
+reference implementation of a proposed reference architecture and playbook: a governed data
 foundation on Oracle AI Data Platform (AIDP) over a read-only copy of FLEXCUBE, and use-case modules that plug into it.
 
 The first module, **cash-flow intelligence**, gives relationship managers, collections and risk teams early warning of
@@ -88,11 +94,27 @@ bash foundation/serving/deploy_serving_layer.sh <AIDP Lakehouse OCID>
 5. **Fair by design.** Protected attributes are never features, rules or rankings.
 6. **Everything as code.** Terraform, idempotent scripts, notebooks built from source, tests and CI.
 
-## Contributing, security and license
+## Contributing and security
 
-- [CONTRIBUTING.md](CONTRIBUTING.md) and the [module contract](use-cases/README.md#module-contract)
-- [SECURITY.md](SECURITY.md)
-- Copyright (c) 2026 Oracle and/or its affiliates. Released under the Universal Permissive License v1.0, see [LICENSE.txt](LICENSE.txt).
+- Suggestions and fixes are welcome through issues and pull requests: see [CONTRIBUTING.md](CONTRIBUTING.md) and the
+  [module contract](use-cases/README.md#module-contract).
+- To report a security concern, see [SECURITY.md](SECURITY.md).
 
-Oracle FLEXCUBE is a trademark of Oracle and/or its affiliates. This is a reference implementation, not a supported product:
-test it and adapt it to your bank's policies before production use.
+## Disclaimer
+
+- **Not an Oracle product.** This playbook is the author's personal work. It is not an official Oracle solution, reference
+  architecture or product, and Oracle does not support, endorse or warrant it.
+- **No warranty.** Everything here (code, scripts, Terraform, notebooks, agent specifications, documentation) is provided
+  "as is", without warranty of any kind, express or implied, including fitness for a particular purpose. The author is not
+  liable for any loss or damage arising from its use.
+- **No license granted yet.** No open source license has been applied while the content is under review. You may read it and
+  try it for evaluation; please contact the author before reusing or redistributing it.
+- **Your responsibility.** Test it in a non-production environment, review it with your security, risk and compliance teams,
+  and adapt it to your bank's policies before use with real data. Model outputs are decision support, not credit decisions.
+- **Synthetic data only.** The sample bank is fully synthetic. No real customer, account or bank data is included, and none
+  should ever be committed to this repository.
+- **Costs.** Deploying it creates billable OCI resources in your tenancy. Remove them when you are done.
+- **Trademarks.** Oracle, FLEXCUBE, OCI and related names are trademarks of Oracle and/or its affiliates. Other names may be
+  trademarks of their respective owners. Their use here does not imply endorsement.
+
+Author: Abeer Naffa'

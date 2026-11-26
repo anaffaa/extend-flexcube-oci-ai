@@ -1,12 +1,11 @@
-# Reporting security vulnerabilities
+# Reporting security concerns
 
-Oracle values the independent security research community and believes that responsible disclosure of security
-vulnerabilities helps us ensure the security and privacy of all our users.
+This is a personal playbook, not an Oracle product. Please do not raise a public GitHub issue for a security concern. Use
+GitHub's private vulnerability reporting on this repository (Security tab, "Report a vulnerability"), or contact the author
+through GitHub.
 
-Please do NOT raise a GitHub Issue to report a security vulnerability. If you believe you have found a security
-vulnerability, please submit a report to [secalert_us@oracle.com](mailto:secalert_us@oracle.com) preferably with a proof of
-concept. Please review some additional information on
-[how to report security vulnerabilities to Oracle](https://www.oracle.com/corporate/security-practices/assurance/vulnerability/reporting.html).
+If you believe you have found a vulnerability in an Oracle product used here (for example OCI or Oracle AI Data Platform),
+report it to Oracle through its official channels, not to this repository.
 
 ## Security practices in this sample
 

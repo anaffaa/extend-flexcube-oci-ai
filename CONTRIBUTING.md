@@ -1,6 +1,6 @@
 # Contributing
 
-This project welcomes contributions from the community. Before submitting a pull request, please review this guide.
+This playbook welcomes contributions. Before submitting a pull request, please review this guide.
 
 ## Opening issues
 
@@ -9,13 +9,8 @@ For bugs or enhancement requests, please file a GitHub issue unless it is securi
 
 ## Contributing code
 
-We welcome your code contributions. Before submitting code via a pull request, you will need to have signed the
-[Oracle Contributor Agreement](https://oca.opensource.oracle.com) (OCA) and your commits need to include the following line
-using the name and e-mail address you used to sign the OCA:
-
-```text
-Signed-off-by: Your Name <you@example.org>
-```
+This is a personal playbook. By opening a pull request you confirm the contribution is your own work, contains no
+confidential or customer information, and may be included in this repository.
 
 ## Pull request process
 
