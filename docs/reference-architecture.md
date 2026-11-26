@@ -134,7 +134,7 @@ Editable drawio versions of both diagrams are in [`architecture/`](../architectu
 - **Availability.** Agents keep answering from the last good serving data when a pipeline run fails, so failures are silent
   unless you alert on them. Route workflow failures to the operations topic.
 - **Data residency.** All components run in your chosen OCI region; OCI Generative AI on-demand models are called in that region.
-- **Cost.** The main drivers are the Spark cluster hours, the AIDP Lakehouse, the source copy and agent compute. Idle
+- **Cost.** The main drivers are AIDP compute (Spark cluster, agent AI compute and the always-on master catalog cluster), the AIDP Lakehouse and the source copy. The reference deployment measured about $1,510 a month at list prices with everything left running, and about $420 a month for a pilot that stops what is idle (see [cost](path-to-production/07_cost.md)).
   timeouts, scheduled runs and stopping non-production databases keep a pilot inexpensive (see
   [cost](path-to-production/07_cost.md)).
 - **Model risk.** The sample models are trained on synthetic scenarios. Back-test on the bank's own outcomes and take them
