@@ -1,0 +1,28 @@
+# settings and secrets
+deploy.env
+.env
+*.pem
+*.tfvars
+!*.tfvars.example
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Python and notebooks
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# local test output
+mlruns/
+.mlruns/
+spark-warehouse/
+.spark-warehouse/
+metastore_db/
+derby.log
+
+.DS_Store

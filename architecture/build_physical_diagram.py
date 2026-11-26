@@ -1,0 +1,66 @@
+import sys
+import os
+SKILL = os.environ.get("OCI_DIAGRAM_SKILL", "oci-architecture-diagrams")  # folder with scripts/ocidraw.py and the OCI toolkit
+sys.path.insert(0, SKILL+"/scripts")
+from ocidraw import Diagram
+d = Diagram(title="Extend FLEXCUBE on OCI - physical")
+d.text("Extend Oracle FLEXCUBE with AI on OCI: physical architecture", 0, 0, 900, 24, size=16, bold=True)
+
+# left: bank data center and Azure
+op = d.group("onprem", "Bank data center", 0, 50, 250, 470)
+fc_op = d.icon("Database", 125, 80, parent=op, label="FLEXCUBE primary\n(on premises)")
+gg = d.icon("goldengate", 125, 200, parent=op, label="GoldenGate\nextract")
+exa = d.icon("exacc", 125, 310, parent=op, label="FLEXCUBE on\nExadata Cloud@Customer")
+cpe = d.icon("cpe", 125, 420, parent=op, label="Edge router", label_pos="right")
+az = d.group("thirdparty", "Microsoft Azure", 0, 560, 250, 170)
+dbaz = d.box("Oracle Database@Azure\nFLEXCUBE standby", 25, 60, 200, 70, parent=az, kind="thirdparty_component")
+
+# region
+reg = d.group("region", "OCI region", 300, 50, 1180, 840)
+drg = d.icon("drg", 45, 380, parent=reg, label="DRG", label_pos="top")
+vcn = d.group("vcn", "solution-vcn\n10.80.0.0/16", 120, 40, 470, 330, parent=reg)
+sn = d.group("subnet", "data subnet (private)\n10.80.10.0/24", 20, 70, 380, 230, parent=vcn)
+copy = d.icon("Database", 315, 110, parent=sn, label="FLEXCUBE copy\nGoldenGate target", label_pos="top")
+smp = d.icon("atp", 195, 110, parent=sn, label="Sample bank\n(optional)")
+fl = d.icon("flow logs", 75, 110, parent=sn, label="Flow logs\nNSG db")
+nat = d.icon("nat", 470, 60, parent=vcn, label="NAT", border=True, label_pos="right")
+sgw = d.icon("sgw", 470, 250, parent=vcn, label="Service\ngateway", border=True, label_pos="right")
+fvcn = d.group("vcn", "flexcube-vcn (existing)\nFLEXCUBE on OCI", 120, 420, 470, 250, parent=reg)
+fsn = d.group("subnet", "db subnet (private)", 20, 70, 380, 150, parent=fvcn)
+fprim = d.icon("Database", 90, 75, parent=fsn, label="FLEXCUBE\nprimary")
+fdg = d.icon("data guard", 280, 75, parent=fsn, label="Standby or\nrefreshable clone")
+
+osn = d.group("osn", "Oracle Services Network", 660, 40, 500, 780, parent=reg)
+aidp = d.group("other", "Oracle AI Data Platform", 20, 40, 460, 420, parent=osn)
+lake = d.icon("Data Lakehouse", 80, 140, parent=aidp, label="Lakehouse\nbronze, silver, gold")
+mlf = d.icon("Machine Learning", 230, 140, parent=aidp, label="MLflow experiments\nand registry")
+wf = d.icon("Workflow", 380, 140, parent=aidp, label="Daily\nworkflow")
+lh = d.icon("adb", 80, 290, parent=aidp, label="AIDP Lakehouse\nserving FCUBS_GOLD")
+ag = d.box("Agents with guardrails\nRM copilot\nAgent Hub, /chat API", 175, 250, 260, 80, parent=aidp, kind="component")
+gai = d.icon("genai", 90, 500, parent=osn, label="OCI Generative AI")
+obj = d.icon("bucket", 250, 500, parent=osn, label="Staging bucket\n(KMS encrypted)")
+vlt = d.icon("vault", 400, 500, parent=osn, label="Vault\npasswords, keys")
+lg = d.icon("logging", 90, 650, parent=osn, label="Logging")
+ons = d.icon("notifications", 250, 650, parent=osn, label="Operations\ntopic")
+iam = d.box("IAM policies\ncompartment scoped", 330, 620, 140, 60, parent=osn, kind="component")
+
+# right
+net = d.group("internet", "Internet", 1530, 50, 210, 470)
+usr = d.icon("users", 105, 370, parent=net, label="RMs, collections,\nrisk")
+slk = d.box("Slack or Teams", 30, 60, 150, 60, parent=net, kind="thirdparty_component")
+
+d.connect(fc_op, gg, kind="plain")
+d.connect(cpe, drg, kind="fastconnect", label="FastConnect")
+d.connect(dbaz, drg, label="OCI interconnect", both=True)
+d.connect(drg, copy, label="GoldenGate replication", waypoints=[(400,430),(400,372),(755,372)], entry=(0.5,1))
+d.connect(fprim, fdg, label="redo")
+d.connect(fvcn, drg, kind="plain")
+d.connect(lake, copy, label="JDBC 1522\nprivate access", both=False)
+d.connect(lake, mlf, both=True)
+d.connect(lake, lh, label="publish")
+d.connect(lh, ag, label="read-only")
+d.connect(ag, gai)
+d.connect(usr, ag, kind="dashed", label="Agent Hub, /chat")
+d.connect(nat, slk, label="egress: alerts, Slack bridge", waypoints=[(nat.abs[0]+nat.w/2, 72), (1615, 72)], entry=(0.5,0) if False else None)
+print(d.check())
+d.save("physical-architecture.drawio"); d.render("physical-architecture.png")
